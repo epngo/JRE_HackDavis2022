@@ -1,5 +1,6 @@
 import copy
 import pyPDF2
+from app.utils import handle_categories
 
 ## This class is made to store all the information related to each time the perception recieves an example to learn from
 ## 'inputs' is the array of 1's and 0's that tell us information about what the current object we are trying to classify
@@ -81,10 +82,14 @@ def perceptron(weights,examples):
     return weights
 
 def nextEntry(returnEntry):
+    #array of rating first return rating.
+    #[[rating, [variable lists]]]
+
+
     allReturns.append(returnEntry)
     for a in range(len(returnEntry[1])):
         varAvgArr[a] = getAvgInArraySpot(a)
-        if(returnEntry == "yes"): ##user says they want to enter info for NN):
+        if(returnEntry[1] == "yes"): ##user says they want to enter info for NN):
             weightsTemp = perceptron(currentWeights,returnEntry)
             currentWeights = weightsTemp
         if():##user says they want to use classification):
