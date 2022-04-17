@@ -75,7 +75,7 @@ def perceptron(weights,examples):
                 ifDoneTemp = False
                 leeway = leeway + leewayAdj/len(examples)
         ifDoneOverall = ifDoneTemp
-            recordOfLessonsInOnePass = cons(recordOfLessonsInOnePass,lesson(examples[y][1],prediction,examples[y][0],copy.deepcopy(weights)))
+        recordOfLessonsInOnePass = cons(recordOfLessonsInOnePass,lesson(examples[y][1],prediction,examples[y][0],copy.deepcopy(weights)))
         recordOfPasses = cons(recordOfPasses,recordOfLessonsInOnePass)
     printPasses(recordOfPasses)
     return weights
@@ -84,7 +84,7 @@ def nextEntry(returnEntry):
     allreturns.append(returnEntry)
     for a in range(5):
         varAvgVar[a] = getAvgInArraySpot(a)
-    if(##user says they want to enter info for NN):
+        if(): ##user says they want to enter info for NN):
         weightsTemp = perceptron(currentWeights,returnEntry);
         currentWeights = weightsTemp
     if(##user says they want to use NN):
