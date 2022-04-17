@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <title>Main page</title>
+    </head>
+
+<body>
+    <div class ="container">
+        <form action = "http://localhost:5000/result" method = "POST">
+            <label>Reading level (1-10)</label>
+            <input name ="readinglevel" type ="number" min=1 max="10"></input>
+            <br/>
+            <br/>
+            <br/>
+            <label>Book Rating (1-10)</label>
+            <input name ="BookRating" type ="number" min=1 max="10"></input>
+            <br/>
+            <br/>
+            <br/>
+            <label>Book Name</label>
+            <input name ="BookName" type ="text"></input>
+            <br/>
+            <br/>
+            <br/>
+            <label>Book pdf</label>
+            <input name ="BookPDF" type ="file"></input>
+            <br/>
+            <br/>
+            <br/>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>
