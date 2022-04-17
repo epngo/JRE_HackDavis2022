@@ -23,6 +23,8 @@ def result():
       print(BookRating)
       print(BookName)
       print(BookPDF)
+
+
       
       return render_template("result.html",result = result)
 
