@@ -34,14 +34,17 @@ def cons(lst, item):
 ## 'examples' is the array of objects that each hold an array of inputs and whether or not those inputs are supposed to output true or false
 ## 'numPasses' is the number of times in which the function will pass the list of examples through the perceptron in order to try and get it to learn more.
 allReturns = []
-varAvgArr = []
-varAdjArr = []
-currentWeights = []
+varAvgArr = [0,0]
+currentWeights = [0,0]
 def getAvgInArraySpot(arrSpot):
+    totalNum = 0
     for a in range(len(allReturns)):
-        totalNum = allReturns[a][1][arrSpot]
-    avg = totalNum/(len(allReturns))
+        totalNum = totalNum + allReturns[a][1][arrSpot]
+    number = (len(allReturns))
+    avg = totalNum/number
     return avg
+
+    
 def perceptron(weights,examples):
     startingWeights = copy.deepcopy(weights)
     recordOfPasses = []
@@ -54,6 +57,7 @@ def perceptron(weights,examples):
         for y in range(len(examples)):
             threshold = examples[y][0]
             total = 0
+            ifDone.append(False)
             for z in range(len(weights)):
                 total = total + weights[z]*examples[y][1][z]
             if (total < threshold):
@@ -74,9 +78,6 @@ def perceptron(weights,examples):
                 ifDoneTemp = False
                 leeway = leeway + leewayAdj/len(examples)
         ifDoneOverall = ifDoneTemp
-        recordOfLessonsInOnePass = cons(recordOfLessonsInOnePass,lesson(examples[y][1],prediction,examples[y][0],copy.deepcopy(weights)))
-        recordOfPasses = cons(recordOfPasses,recordOfLessonsInOnePass)
-    printPasses(recordOfPasses)
     return weights
 
 def nextEntry(returnEntry):
@@ -85,6 +86,9 @@ def nextEntry(returnEntry):
 
 
     allReturns.append(returnEntry)
+    varAvgArr = []
+    for b in range(len(returnEntry[1])):
+        varAvgArr.append(0)
     for a in range(len(returnEntry[1])):
         varAvgArr[a] = getAvgInArraySpot(a)
         if(returnEntry[1] == "yes"): ##user says they want to enter info for NN):

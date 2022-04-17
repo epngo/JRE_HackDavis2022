@@ -53,28 +53,27 @@ def result():
       avgWordLength = sum(wordLength) / totalwords
       print(avgWordLength)
 
-      allReturns =[]
-      varAvgArr = []
-      currentWeights = []
-      returnEntry = [BookRating,[totalwords,avgWordLength]]
+      returnEntry = [float(BookRating),[totalwords,avgWordLength]]
       # append returnEntry
-      allReturns.append(returnEntry)
+      NNforBookClass.allReturns.append(returnEntry)
       
 
-      for a in range(len(returnEntry[1])):
-
-        varAvgArr[a] = getAvgInArraySpot(a)
+      for a in range(len(NNforBookClass.allReturns)):
+        
+        NNforBookClass.varAvgArr[a] = NNforBookClass.getAvgInArraySpot(a)
         if( NNDec =="YES" or NNDec =="yes"):
-            weightsTemp = NNforBookClass.perceptron(currentWeights,returnEntry)
-            currentWeights = weightsTemp
+            weightsTemp = NNforBookClass.perceptron(NNforBookClass.currentWeights,NNforBookClass.allReturns)
+            NNforBookClass.currentWeights = weightsTemp
 
         if(Classification == "YES" or Classification =="yes"):
              rating = 0
-             for z in range(len(currentWeights)):
-                rating = rating + currentWeights[z]*returnEntry[1][z]
+             for z in range(len(NNforBookClass.currentWeights)):
+                rating = rating + NNforBookClass.currentWeights[z]*returnEntry[1][z]
 
 
-      return render_template("result.html",result = rating)
+
+      print("Rating is ",rating)
+      return render_template("result.html",result = range(rating))
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
