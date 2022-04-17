@@ -4,8 +4,9 @@ import os
 import sys
 import re
 import time
-import PyPDF2
 
+import PyPDF2
+import NNforBookClass
 app = Flask(__name__)
 app.secret_key = "a"
 
@@ -15,27 +16,6 @@ def index():
 
 
 @app.route('/result',methods = ['POST', 'GET'])
-
-# def getPageCount(pdf_file):
-# 	pdfFileObj = open(pdf_file, 'rb')
-# 	pdfReader = PyPDF2.PdfFileReader(pdfFileObj, strict=False)
-# 	pages = pdfReader.numPages
-# 	return pages
-
-# def extractData(pdf_file, page):
-# 	pdfFileObj = open(pdf_file, 'rb')
-# 	pdfReader = PyPDF2.PdfFileReader(pdfFileObj, strict=False)
-# 	pageObj = pdfReader.getPage(page)
-# 	data = pageObj.extractText()
-# 	return data
-
-# #def getWordLength(pdf_file, wordCount):
-
-
-# def getWordCount(data):
-# 	data = data.split()
-# 	return len(data)
-
 
 
 
@@ -47,7 +27,8 @@ def result():
       BookRating = request.values.get('BookRating')
       BookName  = request.values.get('BookName')
       BookPDF = request.values.get('BookPDF')
-
+      NNDec = request.values.get('NN')
+      Classification =request.values.get('Classification')
       print(readinglevel) # use result ig and put the data here. 
       print(BookRating)
       print(BookName)
@@ -73,14 +54,27 @@ def result():
       print(avgWordLength)
 
       allReturns =[]
-      returnEntry = []
-      # append 
+      varAvgArr = []
+      currentWeights = []
+      returnEntry = [BookRating,[totalwords,avgWordLength]]
+      # append returnEntry
+      allReturns.append(returnEntry)
+      
+
+      for a in range(len(returnEntry[1])):
+
+        varAvgArr[a] = getAvgInArraySpot(a)
+        if( NNDec =="YES" or NNDec =="yes"):
+            weightsTemp = NNforBookClass.perceptron(currentWeights,returnEntry)
+            currentWeights = weightsTemp
+
+        if(Classification == "YES" or Classification =="yes"):
+             rating = 0
+             for z in range(len(currentWeights)):
+                rating = rating + currentWeights[z]*returnEntry[1][z]
 
 
-
-
-
-      return render_template("result.html",result = result)
+      return render_template("result.html",result = rating)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')

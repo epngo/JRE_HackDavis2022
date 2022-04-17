@@ -1,6 +1,4 @@
 import copy
-import pyPDF2
-from app.utils import handle_categories
 
 ## This class is made to store all the information related to each time the perception recieves an example to learn from
 ## 'inputs' is the array of 1's and 0's that tell us information about what the current object we are trying to classify
