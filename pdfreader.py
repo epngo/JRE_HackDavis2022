@@ -1,26 +1,27 @@
 import os
 import sys
+import re
 import time
 import PyPDF2
 
 def getPageCount(pdf_file):
-
 	pdfFileObj = open(pdf_file, 'rb')
-	pdfReader = PyPDF2.PdfFileReader(pdfFileObj,strict=False)
+	pdfReader = PyPDF2.PdfFileReader(pdfFileObj, strict=False)
 	pages = pdfReader.numPages
 	return pages
 
 def extractData(pdf_file, page):
-
 	pdfFileObj = open(pdf_file, 'rb')
-	pdfReader = PyPDF2.PdfFileReader(pdfFileObj,strict=False)
+	pdfReader = PyPDF2.PdfFileReader(pdfFileObj, strict=False)
 	pageObj = pdfReader.getPage(page)
 	data = pageObj.extractText()
 	return data
 
-def getWordCount(data):
+#def getWordLength(pdf_file, wordCount):
 
-	data=data.split()
+
+def getWordCount(data):
+	data = data.split()
 	return len(data)
 
 def main():
@@ -38,16 +39,21 @@ def main():
 			print(err.reason)
 			exit(1)
 
-
+		wordLength = []
 		# get the word count in the pdf file
 		totalWords = 0
 		numPages = getPageCount(pdfFile)
 		for i in range(numPages):
 			text = extractData(pdfFile, i)
-			totalWords+=getWordCount(text)
+			totalWords += getWordCount(text)
+			wordLength.append(len(text))
+		
+		
 		time.sleep(1)
 
-		print (totalWords)
+		print(totalWords)
+		avgWordLength = sum(wordLength) / totalWords
+		print(avgWordLength)
 
 if __name__ == '__main__':
 	main()
