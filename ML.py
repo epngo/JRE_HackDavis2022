@@ -71,7 +71,9 @@ def result():
       print(totalwords)
       avgWordLength = sum(wordLength) / totalwords
       print(avgWordLength)
-      return render_template("result.html",result = result)
+
+      
+      return render_template("result.html",result = avgWordLength)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')

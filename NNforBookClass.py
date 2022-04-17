@@ -81,17 +81,15 @@ def perceptron(weights,examples):
     return weights
 
 def nextEntry(returnEntry):
-    allreturns.append(returnEntry)
+    allReturns.append(returnEntry)
     for a in range(len(returnEntry[1])):
-        varAvgVar[a] = getAvgInArraySpot(a)
-        if(): ##user says they want to enter info for NN):
-        weightsTemp = perceptron(currentWeights,returnEntry);
-        currentWeights = weightsTemp
-    if(##user says they want to use NN):
-        rating = 0
-        for z in range(len(weights)):
-        rating = rating + currentWeights[z]*returnEntry[1][z]
+        varAvgArr[a] = getAvgInArraySpot(a)
+        if(returnEntry == "yes"): ##user says they want to enter info for NN):
+            weightsTemp = perceptron(currentWeights,returnEntry)
+            currentWeights = weightsTemp
+        if():##user says they want to use classification):
+            rating = 0
+        for z in range(len(currentWeights)):
+            rating = rating + currentWeights[z]*returnEntry[1][z]
         return rating
-    
-    
-    
+

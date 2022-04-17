@@ -47,10 +47,7 @@ def main():
 			text = extractData(pdfFile, i)
 			totalWords += getWordCount(text)
 			wordLength.append(len(text))
-		
-		
 		time.sleep(1)
-
 		print(totalWords)
 		avgWordLength = sum(wordLength) / totalWords
 		print(avgWordLength)
