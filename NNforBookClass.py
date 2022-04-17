@@ -84,8 +84,14 @@ def nextEntry(returnEntry):
     allreturns.append(returnEntry)
     for a in range(5):
         varAvgVar[a] = getAvgInArraySpot(a)
-    weightsTemp = perceptron(currentWeights,returnEntry);
-    currentWeights = weightsTemp
+    if(##user says they want to enter info for NN):
+        weightsTemp = perceptron(currentWeights,returnEntry);
+        currentWeights = weightsTemp
+    if(##user says they want to use NN):
+        rating = 0
+        for z in range(len(weights)):
+        rating = rating + currentWeights[z]*returnEntry[1][z]
+        return rating
     
     
     
