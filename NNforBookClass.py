@@ -82,7 +82,7 @@ def perceptron(weights,examples):
 
 def nextEntry(returnEntry):
     allreturns.append(returnEntry)
-    for a in range(5):
+    for a in range(len(returnEntry[1])):
         varAvgVar[a] = getAvgInArraySpot(a)
     if(##user says they want to enter info for NN):
         weightsTemp = perceptron(currentWeights,returnEntry);
